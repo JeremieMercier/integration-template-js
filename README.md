@@ -59,14 +59,17 @@ logic (the device modules) and utilities (`weather.js`, `config.js`) are kept
 separate so the parts you edit stay small.
 
 The plumbing you would otherwise copy into every integration comes straight
-from the SDK (v0.9.0+):
+from the SDK (v0.10.0+):
 
 - `logger` / `createLogger({ name })` — leveled console logger (`LOG_LEVEL`
   env var), with named/child loggers per module. Since SDK v0.4 the SDK also
   logs its own connection lifecycle (under the `gladys-sdk` name), so
   connectivity problems show up in `docker logs` without extra code;
 - `DEVICE_FEATURE_CATEGORIES`, `DEVICE_FEATURE_TYPES`, `DEVICE_FEATURE_UNITS`
-  — the standard Gladys categories / types / units, no manual string copying;
+  — the standard Gladys categories / types / units, no manual string copying.
+  SDK v0.10 adds the `battery-storage`, `doorbell` and `water-valve`
+  categories, the climate `fan-speed` / `swing-horizontal` / `swing-vertical`
+  types and the `cubic-meter-per-hour` unit;
 - `gladys.externalIds(type, platformId)` — builds the unique, stable device
   and feature external ids;
 - `gladys.handleShutdown(cleanup)` — graceful SIGTERM/SIGINT handling;
